@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 
 
 app.post("/formulario", (req, res) => { /*ENDPOINT*/
-    //console.log(req.body);
+    console.log(req.body);
     configMessage(req.body);
     res.status(200).send();
 });
