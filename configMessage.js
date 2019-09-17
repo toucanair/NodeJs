@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 const smtpTransport = require('nodemailer-smtp-transport');
 
 
@@ -17,7 +17,7 @@ module.exports = (formulario) => {
     }));
    let mailOptions = {
     from: 'toucanairit@gmail.com', //'"${formulario.nombre}” <${formulario.email}>',
-    to: 'zuarfer@gmail.com', //  destinatario
+    to: "zuarfer@gmail.com", //  destinatario
     subject: "NewPage Contact Request",
     html: `
         <p> You have a New Contact Request </p>
