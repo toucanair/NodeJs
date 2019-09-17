@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 const smtpTransport = require('nodemailer-smtp-transport');
 
 
@@ -8,8 +8,8 @@ module.exports = (formulario) => {
     port: 465,
     secure: true,
     auth: {
-        user: 'toucanairit@gmail.com', // Cambialo por tu email
-        pass: 'Toucanairllc2019.' // Cambialo por tu password
+        user: 'toucanairit@gmail.com', //  email
+        pass: 'Toucanairllc2019.' //  password
     },
     tls:{
         rejectUnauthorized:false
@@ -17,7 +17,7 @@ module.exports = (formulario) => {
     }));
    let mailOptions = {
     from: 'toucanairit@gmail.com', //'"${formulario.nombre}” <${formulario.email}>',
-    to: "barbara29rp@gmail.com", // Cambia esta parte por el destinatario
+    to: 'zuarfer@gmail.com', //  destinatario
     subject: "NewPage Contact Request",
     html: `
         <p> You have a New Contact Request </p>
