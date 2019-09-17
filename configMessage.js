@@ -17,7 +17,7 @@ module.exports = (formulario) => {
     }));
    let mailOptions = {
     from: 'toucanairit@gmail.com', //'"${formulario.nombre}” <${formulario.email}>',
-    to: "barbara29rp@gmail.com, juan@toucanair.com, zuarfer@gmail.com, sales@toucanair.com", //  destinatario
+    to: "zuarfer@gmail.com", //  destinatario
     subject: "NewPage Contact Request",
     html: `
         <p> You have a New Contact Request </p>
