@@ -15,12 +15,13 @@ module.exports = (formulario) => {
         rejectUnauthorized:false
     }
     }));
+
    let mailOptions = {
     from: 'toucanairit@gmail.com', //'"${formulario.nombre}” <${formulario.email}>',
     to: "zuarfer@gmail.com", //  destinatario
     subject: "NewPage Contact Request",
     html: `
-        <p> You have a New Contact Request </p>
+        <p> You have a New Contact Request: </p>
         <ul>
             <li><strong>Name:</strong> ${formulario.name}</li>
             <li><strong>E-mail:</strong> ${formulario.email}</li>
