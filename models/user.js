@@ -16,9 +16,9 @@ async function find(context) {
   const binds = {};
  
   if (context.id) {
-    binds.ID_USER = context.id;
+    binds.USER_ID = context.id;
  
-    query += `\nwhere ID_USER = :id_user`; //variable de enlace
+    query += `\nwhere USER_ID = :user_id`; //variable de enlace
   }
  
   const result = await database.simpleExecute(query, binds);
@@ -123,20 +123,3 @@ module.exports.delete = del;
     :rowcount := sql%rowcount;
  
   end;`*/
-
-
-
-
-/*
-var UserSchema = Schema({
-    firstname: String,
-    lastname: String,
-    phone: String,
-    email: String,
-    user: String,
-    password: String
-});
-
-module.exports = oracledb.model('User', UserSchema);
-
-*/
