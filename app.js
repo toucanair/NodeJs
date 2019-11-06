@@ -18,7 +18,7 @@ var user_routes = require ('./routes/user');
 
 
 
-/*ENDPOINT TO SEND EMAILS*//*
+
 app.post("/formulario", (req, res) => { 
     console.log(req.body);
     configMessage(req.body);

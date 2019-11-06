@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require('express');
 const morgan = require("morgan");
 const bodyparser = require("body-parser");
-const configMessage = require("./configMessage");
+const configMessage = require("../configMessage");
 const database = require('./database.js');
 const router = require('../routes/user.js');
 
@@ -50,6 +50,7 @@ function initialize() {
       })
       .on('error', err => {
         reject(err);
+        console.log(err);
       });
   });
 }
