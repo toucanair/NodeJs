@@ -1,7 +1,9 @@
 const http = require('http');
+const cors = require("cors");
 const express = require('express');
 const morgan = require("morgan");
 const bodyparser = require("body-parser");
+const configMessage = require("./configMessage");
 const database = require('./database.js');
 const router = require('../routes/user.js');
 
@@ -16,6 +18,7 @@ function initialize() {
     httpServer = http.createServer(app);
 
     //Middlewares
+    app.use(cors()); 
     app.use(morgan('combined'));
     app.use(bodyparser.json());
     app.use('/login',router);
@@ -31,6 +34,12 @@ function initialize() {
       const date = result.rows[0].SYSTIMESTAMP;
  
       res.end(`DB user: ${user}\nDate: ${date}`);
+    });
+
+    app.post("/formulario", (req, res) => { 
+      console.log(req.body);
+      configMessage(req.body);
+      res.status(200).send();
     });
  
     httpServer.listen(3000)
