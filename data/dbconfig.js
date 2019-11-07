@@ -1,12 +1,12 @@
 
 module.exports = {
-  user : process.env.NODE_ORACLEDB_USER || "admin",
+  user :"admin",
   
-  password : process.env.NODE_ORACLEDB_PASSWORD || "Toucanair2019",
+  password :"Toucanair2019",
   
-  connectString : process.env.NODE_ORACLEDB_CONNECTIONSTRING || "mydb.cdnbnushsvmq.us-east-2.rds.amazonaws.com:1521/DBTOUCAN",
+  connectString :"mydb.cdnbnushsvmq.us-east-2.rds.amazonaws.com:1521/DBTOUCAN",
   
-  externalAuth : process.env.NODE_ORACLEDB_EXTERNALAUTH ? true : false
+  externalAuth :  false
  };
 
  /*
