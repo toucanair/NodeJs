@@ -41,7 +41,7 @@ function initialize() {
       configMessage(req.body);
       res.status(200).send();
     });
-    let port = 3010;
+    let port = 3000;
     httpServer.listen(port)
       .on('listening', () => {
         console.log(`Web server listening on localhost:${port}`);
