@@ -6,6 +6,7 @@ const bodyparser = require("body-parser");
 const configMessage = require("../configMessage");
 const database = require('./database.js');
 const router = require('../routes/user.js');
+const validateLogin = require('../routes/login.js');
 
 
 //const webServerConfig = require('../config/web-server.js');
@@ -21,7 +22,9 @@ function initialize() {
     app.use(cors()); 
     app.use(morgan('combined'));
     app.use(bodyparser.json());
+    app.use(bodyparser.urlencoded({ extended: true}));
     app.use('/login',router);
+    app.use('/validate',validateLogin);
 
     app.use(express.json({
       reviver: reviveJson

@@ -56,15 +56,18 @@ async function get(req, res, next) {
   async function put(req, res, next) {
     try {
       let user = getUserFromRec(req);
-   
+      console.log(user);
       user.user_id = parseInt(req.params.id, 10);
    
       user = await users.update(user);
+      console.log(user);
    
       if (user !== null) {
-        res.status(200).json(user);
+        console.log("user edited")
+        res.status(200).send(true);
       } else {
-        res.status(404).end();
+        console.log("Can't Modify this user")
+        res.status(200).send(false);
       }
     } catch (err) {
       next(err);
@@ -80,9 +83,11 @@ async function get(req, res, next) {
       const success = await users.delete(id);
    
       if (success) {
-        res.status(204).end();
+        console.log("User deleted");
+        res.status(200).send(true);
       } else {
-        res.status(404).end();
+        console.log("User don't exist")
+        res.status(200).send(false);
       }
     } catch (err) {
       next(err);
@@ -91,66 +96,4 @@ async function get(req, res, next) {
    
   module.exports.delete = del;
 
-
-/*
-const oracledb = require("oracledb");
-var controller = {
-
-    home: function(req,res){
-        return res.status(200).send({
-            message: "HOMEEEE"
-        });
-    },
-
-    test: function(req,res){
-        return res.status(200).send({
-            message: "TESTTTT"
-        });
-    },
-
-    users: function(req,res){ 
-        oracledb.getConnection(
-            {
-                user          : "admin",
-                password      : "Toucanair2019",
-                connectString : "mydb.cdnbnushsvmq.us-east-2.rds.amazonaws.com:1521/DBTOUCAN"
-            },
-            function(err, connection)
-            {
-                if (err) { console.error(err); return; }
-                 connection.execute(
-                 `SELECT USER_ID "user_id", FIRST_NM "firstN" , LAST_NM "lastN" FROM DBTOUCAN."USER"`,
-                 function(err, result)
-                 {
-                    if (err) { console.error(err); return; }
-                    console.log(result.rows);
-                    res.json(result.rows);
-
-                 });
-            });
-    },
-
-    /*newUser: function(req,res){
-      /*  var user = new User();
-
-        return res.status(200).send({
-            message: " guardando"
-        });
-    },
-
-    Validate: function(req,res){
-        var username = req.params.username;
-        var password = req.params.password;
-
-        if(username == null){
-            return res.status(404).send({
-                message: " username no existe "
-            });                
-        }
-
-        
-    }
   
-};
-
-module.exports = controller;*/
