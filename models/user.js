@@ -55,7 +55,7 @@ async function create(emp) {
     dir: oracledb.BIND_OUT,
     type: oracledb.NUMBER
   }*/
-  console.log(user);
+  
 
   const result = await database.simpleExecute(createSql, user);
  

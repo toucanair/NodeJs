@@ -7,6 +7,7 @@ const configMessage = require("../configMessage");
 const database = require('./database.js');
 const router = require('../routes/user.js');
 const validateLogin = require('../routes/login.js');
+const jwt = require('jsonwebtoken');
 
 
 //const webServerConfig = require('../config/web-server.js');
@@ -25,6 +26,7 @@ function initialize() {
     app.use(bodyparser.urlencoded({ extended: true}));
     app.use('/login',router);
     app.use('/validate',validateLogin);
+
 
     app.use(express.json({
       reviver: reviveJson
@@ -45,6 +47,7 @@ function initialize() {
       res.status(200).send();
     });
     let port = 3000;
+    
     httpServer.listen(port)
       .on('listening', () => {
         console.log(`Web server listening on localhost:${port}`);

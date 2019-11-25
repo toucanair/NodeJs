@@ -56,11 +56,11 @@ async function get(req, res, next) {
   async function put(req, res, next) {
     try {
       let user = getUserFromRec(req);
-      console.log(user);
+
       user.user_id = parseInt(req.params.id, 10);
    
       user = await users.update(user);
-      console.log(user);
+     
    
       if (user !== null) {
         console.log("user edited")
