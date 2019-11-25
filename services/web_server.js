@@ -41,7 +41,7 @@ function initialize() {
       res.end(`DB user: ${user}\nDate: ${date}`);
     });
 
-    app.post('/hola', async (req, res) => {
+    app.get('/hola', async (req, res) => {
       /*res.end('Api Toucan Air NEW');*/
     const result = await database.simpleExecute('select user, systimestamp from dual');
     const user = result.rows[0].USER;
