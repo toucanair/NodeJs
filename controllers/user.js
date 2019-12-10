@@ -33,19 +33,35 @@ async function get(req, res, next) {
       phone_number: req.body.phone_number,
       email: req.body.email,
       username: req.body.username,
-      passw: req.body.passw
+      passw: req.body.passw,
+      rol: req.body.rolConfCtrl
     };
-
+    
     return user;
   }
    
   async function post(req, res, next) { //
     try {
       let user = getUserFromRec(req);
-   
-      user = await users.create(user);
-   
-      res.status(201).json(user);
+
+      var compUsn = await users.compUsern(user.username);
+      var compEmail = await users.compEmail(user.email);
+
+      if (!compUsn && !compEmail){
+        console.log(' new User');
+        user = await users.create(user);
+        res.status(201).send(true);
+       }else{
+         if(compUsn){
+          console.log(' Username already exist');
+          res.send({message:'false1'});
+         }
+         if(compEmail){
+          console.log(' Email already have an account');
+          res.send({message:'false2'});
+         }
+       }
+  
     } catch (err) {
       next(err);
     }
@@ -56,9 +72,7 @@ async function get(req, res, next) {
   async function put(req, res, next) {
     try {
       let user = getUserFromRec(req);
-
       user.user_id = parseInt(req.params.id, 10);
-   
       user = await users.update(user);
      
    

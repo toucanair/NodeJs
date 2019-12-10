@@ -41,14 +41,7 @@ function initialize() {
       res.end(`DB user: ${user}\nDate: ${date}`);
     });
 
-    app.get('/hola', async (req, res) => {
-      /*res.end('Api Toucan Air NEW');*/
-    const result = await database.simpleExecute('select user, systimestamp from dual');
-    const user = result.rows[0].USER;
-    const date = result.rows[0].SYSTIMESTAMP;
-
-    res.end(`holaaaaaaaa: ${user}\nDate: ${date}`);
-  });
+  
 
     app.post("/formulario", (req, res) => { 
       console.log(req.body);

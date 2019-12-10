@@ -8,7 +8,8 @@ LAST_NM "last_name",
 PHN_NUM "phone_number",
 EMAIL "email",
 USERNAME "username",
-PASSWORD "passw"
+PASSWORD "passw",
+USER_ROL_ID "rol"
 from DBTOUCAN."USER"`;
  
 async function find(context) {
@@ -17,17 +18,66 @@ async function find(context) {
  
   if (context.id) {
     binds.USER_ID = context.id;
- 
     query += `\nwhere USER_ID = :user_id`; //variable de enlace
   }
  
   const result = await database.simpleExecute(query, binds);
- 
   return result.rows;
 }
- 
 module.exports.find = find;
 
+const compareUsername = 
+`SELECT 
+USERNAME "username"
+from DBTOUCAN."USER"`;
+
+async function compUsern(username) {
+
+  let query = compareUsername;
+  const binds = {};
+  
+  if (username) {
+    binds.USERNAME = username;
+    query += `\n where USERNAME = :username`; //variable de enlace
+  }
+  result = await database.simpleExecute(query, binds);
+
+  if (result.rows[0] === undefined){
+     return false;
+  }else{
+     return true;
+  }
+ 
+}
+ 
+module.exports.compUsern = compUsern;
+
+const compareEmail = 
+`SELECT 
+EMAIL "email"
+from DBTOUCAN."USER"`;
+
+async function compEmail(email) {
+
+  let query = compareEmail;
+  const binds = {};
+  
+  if (email) {
+    binds.EMAIL = email;
+    query += `\n  where EMAIL= :email`; //variable de enlace
+  } 
+  result = await database.simpleExecute(query, binds);
+
+  
+  if (result.rows[0] === undefined){
+     return false;
+  }else{
+     return true;
+  }
+ 
+}
+ 
+module.exports.compEmail = compEmail;
 
 const createSql =
  `insert into DBTOUCAN."USER" (
@@ -37,7 +87,8 @@ const createSql =
     PHN_NUM,
     EMAIL,
     USERNAME,
-    PASSWORD
+    PASSWORD,
+    USER_ROL_ID
   ) values (
     :user_id,
     :first_name,
@@ -45,21 +96,15 @@ const createSql =
     :phone_number,
     :email,
     :username,
-    :passw
+    :passw,
+    :rol
   )`;
  
 async function create(emp) {
   const user = Object.assign({}, emp);
-/*
-  user.id_user = {
-    dir: oracledb.BIND_OUT,
-    type: oracledb.NUMBER
-  }*/
   
-
   const result = await database.simpleExecute(createSql, user);
- 
- /*user.user_id = result.outBinds.user_id[0];*/
+  
   return user;
 }
  
@@ -72,7 +117,8 @@ const updateSql =
       PHN_NUM = :phone_number,
       EMAIL = :email,
       USERNAME = :username,
-      PASSWORD = :passw
+      PASSWORD = :passw,
+      USER_ROL_ID = :rol
   where USER_ID = :user_id`;
  
 async function update(emp) {
